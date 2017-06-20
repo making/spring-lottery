@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Lottery!</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.2/css/bulma.min.css">
+    <link rel="stylesheet" href="http://github.hubspot.com/odometer/themes/odometer-theme-slot-machine.css"/>
+    <script src="http://github.hubspot.com/odometer/odometer.js"></script>
+    <style>
+        .odometer {
+            font-size: 100px;
+        }
+
+        .xlarge {
+            font-size: x-large;
+        }
+    </style>
+</head>
+<body>
+
+<h1 class="title">Spring Frameworkステッカー 2名</h1>
+<img src="images/spring-framework.jpg" width="300px">
+<div>
+    <div class="odometer">999</div>
+    <button class="xlarge" onclick="chooseOne(this);">抽選</button>
+    <span class="xlarge"></span>
+    <br>
+</div>
+<div>
+    <div class="odometer">999</div>
+    <button class="xlarge" onclick="chooseOne(this);">抽選</button>
+    <span class="xlarge"></span>
+</div>
+<hr>
+<h1 class="title">Spring Bootステッカー 2名</h1>
+<img src="images/spring-boot.jpg" width="300px">
+<div>
+    <div class="odometer">999</div>
+    <button class="xlarge" onclick="chooseOne(this);">抽選</button>
+    <span class="xlarge"></span>
+</div>
+<div>
+    <div class="odometer">999</div>
+    <button class="xlarge" onclick="chooseOne(this);">抽選</button>
+    <span class="xlarge"></span>
+</div>
+<hr>
+<h1 class="title">Spring Securityステッカー 2名</h1>
+<img src="images/spring-security.jpg" width="300px">
+<div>
+    <div class="odometer">999</div>
+    <button class="xlarge" onclick="chooseOne(this);">抽選</button>
+    <span class="xlarge"></span>
+</div>
+<div>
+    <div class="odometer">999</div>
+    <button class="xlarge" onclick="chooseOne(this);">抽選</button>
+    <span class="xlarge"></span>
+</div>
+<hr>
+<h1 class="title">Spring Cloud Data Flowステッカー 2名</h1>
+<img src="images/spring-cloud-dataflow.jpg" width="300px">
+<div>
+    <div class="odometer">999</div>
+    <button class="xlarge" onclick="chooseOne(this);">抽選</button>
+    <span class="xlarge"></span>
+</div>
+<div>
+    <div class="odometer">999</div>
+    <button class="xlarge" onclick="chooseOne(this);">抽選</button>
+    <span class="xlarge"></span>
+</div>
+<hr>
+<h1 class="title">ステッカー全種 1名</h1>
+<img src="images/all.jpg" width="300px">
+<div>
+    <div class="odometer">999</div>
+    <button class="xlarge" onclick="chooseOne(this);">抽選</button>
+    <span class="xlarge"></span>
+</div>
+
+<script src="./js/axios.min.js"></script>
+<script>
+    var excludes = [];
+
+    function chooseOne(button) {
+        var odometer = button.previousElementSibling;
+        var text = button.nextElementSibling;
+        button.disabled = true;
+        text.innerText = '🔮 抽選中...';
+        axios.get('/chooseOne?excludes=' + excludes.join(',')).then(function (res) {
+            var data = res.data;
+            excludes.push(data.number);
+            odometer.innerHTML = data.number;
+            setTimeout(function () {
+                text.innerText = '🎉 ' + data.name + 'さん';
+                button.disabled = false;
+            }, 2500);
+        });
+    }
+
+</script>
+</body>
+</html>
