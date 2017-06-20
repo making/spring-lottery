@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DummyTicketMapper implements TicketMapper {
-	Random random = new Random();
-	List<Ticket> data = new ArrayList<>();
+	final Random random = new Random();
+	final List<Ticket> data = new ArrayList<>();
 
 	public DummyTicketMapper() {
 		for (int i = 0; i < 20; i++) {
