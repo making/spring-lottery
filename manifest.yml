@@ -3,3 +3,5 @@ applications:
   random-route: true
   buildpack: java_buildpack
   path: target/spring-lottery-0.0.1-SNAPSHOT.jar
+  services:
+  - lottery-db # cf create-service cleardb spark lottery-db
